@@ -20,3 +20,4 @@ output_gradio/
 *.zip
 *.wav
 *.pth
+outputs/

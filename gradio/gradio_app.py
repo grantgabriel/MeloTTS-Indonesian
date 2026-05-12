@@ -2,6 +2,7 @@ import gradio as gr
 import subprocess
 import os
 
+# FIX: Change the audio path from direct path to relative path.
 AUDIO_PATH = "output_gradio/LJSpeech/output.wav"
 
 def infer_and_play(text):
@@ -10,28 +11,28 @@ def infer_and_play(text):
     os.makedirs(os.path.dirname(AUDIO_PATH), exist_ok=True)
 
     result = subprocess.run(
-        ["python3", "run_infer.py", text],
+        ["python", "gradio/run_infer.py", text],
         capture_output=True,
         text=True
     )
 
     if result.returncode != 0:
-        print("❌ Error saat inference:")
+        print("Error at inference:")
         print(result.stderr)
-        return None, "❌ Inference gagal!"
+        return None, "Inference failed!"
 
-    print("✅ Inference sukses!")
+    print("Inference success!")
     print(result.stdout)
 
     if os.path.exists(AUDIO_PATH):
-        return AUDIO_PATH, f"✅ Teks diproses: {text}"
+        return AUDIO_PATH, f"✅ Text processed: {text}"
     else:
-        return None, "❌ File audio tidak ditemukan!"
+        return None, "❌ Audio file not found!"
 
 with gr.Blocks() as demo:
-    gr.Markdown("# 🎙️ MeloTTS Demo - PT Bahasa Kinerja Utama")
+    gr.Markdown("# 🎙️ MeloTTS Demo")
 
-    text_input = gr.Textbox(label="Input Text", placeholder="Tulis teks di sini...", lines=2)
+    text_input = gr.Textbox(label="Input Text", placeholder="Place your text here...", lines=2)
     btn = gr.Button("Submit")
 
     audio_output = gr.Audio(label="Generated Audio", type="filepath")
