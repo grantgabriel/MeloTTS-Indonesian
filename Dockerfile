@@ -1,13 +1,11 @@
-FROM python:3.9-slim
-WORKDIR /app
-COPY . /app
+RUN useradd -m -u 1000 user
+USER user
+ENV HOME=/home/user \
+    PATH=/home/user/.local/bin:$PATH
 
-RUN apt-get update && apt-get install -y \
-    build-essential libsndfile1 \
-    && rm -rf /var/lib/apt/lists/*
+WORKDIR $HOME/app
 
-RUN pip install -e .
-RUN python -m unidic download
-RUN python melo/init_downloads.py
+COPY --chown=user . $HOME/app
 
-CMD ["python", "./melo/app.py", "--host", "0.0.0.0", "--port", "8888"]
+EXPOSE 7860
+CMD ["python", "gradio/app.py"]
