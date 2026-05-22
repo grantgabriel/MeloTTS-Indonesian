@@ -41,4 +41,4 @@ with gr.Blocks() as demo:
     btn.click(fn=infer_and_play, inputs=text_input, outputs=[audio_output, status_output])
 
 if __name__ == "__main__":
-    demo.launch(server_name="127.0.0.1", server_port=7860)
+    demo.launch(server_name="127.0.0.1", server_port=3000)
