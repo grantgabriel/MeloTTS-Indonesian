@@ -2,7 +2,6 @@ import gradio as gr
 import subprocess
 import os
 
-# FIX: Change the audio path from direct path to relative path.
 AUDIO_PATH = "output_gradio/LJSpeech/output.wav"
 
 def infer_and_play(text):

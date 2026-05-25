@@ -2,10 +2,11 @@ import subprocess
 import os
 import sys
 
-# FIX: Fix audio path.
+# Customize the model path based on your models.
 def run_inference(text, model_path="models/LJSpeech Models/G_1637000.pth", output_dir="output_gradio"):
     os.makedirs(output_dir, exist_ok=True)
 
+    # Please customize the script based on your language.
     result = subprocess.run(
         [
             "python", "melo/infer.py",
