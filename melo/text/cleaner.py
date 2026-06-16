@@ -1,8 +1,8 @@
-from . import english, indonesia
+from . import english, indonesian
 from . import cleaned_text_to_sequence
 import copy
 
-language_module_map = {"EN": english, "ID": indonesia}
+language_module_map = {"EN": english, "ID": indonesian}
 
 
 def clean_text(text, language):
